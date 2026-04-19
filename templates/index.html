@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IrisDx | Medical Iris Recognition System</title>
+    <!-- Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Phosphor Icons for medical/UI icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="glass-panel header">
+            <div class="logo">
+                <i class="ph ph-eye-scan"></i>
+                <h1>Iris<span>Dx</span></h1>
+            </div>
+            <div class="system-status">
+                <span class="pulse-dot"></span> System Online
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Panel: Upload & Display -->
+            <section class="glass-panel scanner-panel">
+                <div class="panel-header">
+                    <h2><i class="ph ph-image"></i> Optical Input</h2>
+                    <span class="badge">Awaiting Image</span>
+                </div>
+                
+                <div class="scanner-container" id="drop-zone">
+                    <div class="upload-prompt" id="upload-prompt">
+                        <i class="ph ph-upload-simple"></i>
+                        <p>Drag & Drop Ocular Scan Here</p>
+                        <span class="subtitle">or click to browse local files</span>
+                        <input type="file" id="file-input" accept="image/*" hidden>
+                        <button class="btn-primary" id="browse-btn">Select Image</button>
+                    </div>
+
+                    <div class="image-preview-container hidden" id="image-preview-container">
+                        <img id="image-preview" src="" alt="Eye Scan">
+                        <!-- Scanning Animation Overlays -->
+                        <div class="scan-line hidden" id="scan-line"></div>
+                        <div class="grid-overlay"></div>
+                        <div class="reticle"></div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn-action hidden" id="scan-btn" disabled>
+                        <i class="ph ph-radar"></i> Initiate Analysis
+                    </button>
+                    <button class="btn-secondary hidden" id="reset-btn">
+                        <i class="ph ph-arrow-counter-clockwise"></i> Reset
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Panel: Results & Diagnostics -->
+            <section class="glass-panel results-panel">
+                <div class="panel-header">
+                    <h2><i class="ph ph-activity"></i> Diagnostics</h2>
+                </div>
+
+                <div class="diagnostics-content">
+                    <div class="status-indicator" id="status-indicator">
+                        <i class="ph ph-placeholder"></i>
+                        <p>Awaiting scan initiation...</p>
+                    </div>
+
+                    <!-- Processing Animation -->
+                    <div class="processing-state hidden" id="processing-state">
+                        <div class="spinner"></div>
+                        <p>Analyzing iris patterns...</p>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="progress-bar"></div>
+                        </div>
+                        <ul class="processing-steps">
+                            <li class="active">Isolating pupil...</li>
+                            <li>Normalizing unwrapped iris...</li>
+                            <li>Extracting Gabor features...</li>
+                            <li>Matching against registry...</li>
+                        </ul>
+                    </div>
+
+                    <!-- Results Data -->
+                    <div class="results-data hidden" id="results-data">
+                        <div class="result-card primary-result">
+                            <h3>Identification Result</h3>
+                            <div class="result-value match" id="subject-id">--</div>
+                        </div>
+                        
+                        <div class="result-card metrics">
+                            <div class="metric">
+                                <span class="label">Confidence Level</span>
+                                <span class="value" id="confidence-val">--%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="label">Processing Mode</span>
+                                <span class="value" id="mode-val">--</span>
+                            </div>
+                        </div>
+
+                        <div class="alert-box info">
+                            <i class="ph ph-info"></i>
+                            <p id="system-message">Match confirmed within acceptable clinical tolerance.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>CASIA-Iris-Thousand Diagnostic Tool | v1.0.0</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# =============================================================================
+#  IrisDx — Python Dependencies
+# =============================================================================
+
+# --- Web Framework ---
+Flask>=2.3.3
+Werkzeug>=2.3.7
+
+# --- Image Processing ---
+numpy>=1.24.3
+Pillow>=10.0.0
+opencv-python>=4.8.0.76
+
+# --- Deep Learning (optional — required for real inference) ---
+# Uncomment the line below if you have a GPU-compatible environment,
+# or install manually: pip install tensorflow
+# tensorflow>=2.13.0
